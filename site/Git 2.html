@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - IA et la médecine</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: black;
+            color: white;
+            line-height: 1.6;
+        }
+        header, footer {
+            text-align: center;
+            padding: 1em 0;
+            background: #78787f;
+        
+        }
+        nav a { 
+            margin: 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body onLoad="construireListeMaladies()"> 
+    <header>
+        <h1>IA et Diagnostics Médicaux</h1>
+        <nav>
+            <a href="accueil1.html">Accueil</a>
+            <a href="contact4.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact" class="content-section"> 
+            <h2>Contact</h2>
+            <h2>Formulaire</h2>
+            <form name="formulaire"> 
+                <label for="nom">Nom : </label>  
+                <input type="text" name="nom" id="nom" maxlength="60" /><br />
+                
+                <label for="prenom">Prénom : </label>
+                <input type="text" name="prenom" id="prenom" maxlength="60" /><br /> 
+                
+                Sexe :  
+                <input type="radio" name="sexe" id="homme" value="0"/>
+                <label for="homme">Homme</label>
+                <input type="radio" name="sexe" id="femme" value="1" />
+                <label for="femme">Femme</label><br />
+                
+                <label for="mail">Adresse e-mail : </label>
+                <input type="email" name="mail" id="mail" /><br />
+                
+                <label for="motdepasse">Mot de passe : </label> 
+                <input type="password" name="motdepasse" id="motdepasse" /><br />
+
+                Maladies : 
+                <select id="maladies" onchange="construireListeSolutions()">
+                    <option value="choisirMaladie">Choisissez une maladie...</option> 
+                </select>
+                <br />
+                Solutions d'IA :  
+                <select id="solutions"> 
+                    <option value="choisirSolution">Choisissez une solution d'IA...</option>
+                </select>
+                <br/>
+                <label for="Avis">Quelle est votre opinion sur l'IA dans le domaine de la santé ?</label><br />
+                
+                <input type="checkbox" id="positive" name="avis" value="positive" />
+                <label for="positive">Plutôt positive</label><br />
+                
+                <input type="checkbox" id="negative" name="avis" value="negative" />
+                <label for="negative">Plutôt négative</label><br />
+                
+                <label for="commentaires">Commentaires :</label><br />  
+                <textarea id="commentaires" name="commentaires" rows="5" cols="25"></textarea>
+                <br />
+                <input type="button" value="Valider" onclick="validerFormulaire()" /> 
+        </section>
+    </main>
+
+    <footer> 
+        <p>&copy; 2025 IA et la médecine Myriam Dhairi / Lyna Bouchareb </p>
+    </footer>
+
+    <script>
+       
+        var tabMaladies = ["Cancer", "Maladies infectieuses", "Maladies cardiovasculaires"]; 
+
+        
+        var tabSolutions = [ 
+            ["Diagnostic à partir d'images médicales", "Analyse d'images de biopsies"], 
+            ["Détection rapide par analyse d'images", "Suivi des épidémies via des données visuelles"], 
+            ["Analyse de l'échographie cardiaque", "Surveillance à l'aide de photographies de symptômes"] 
+        ];
+
+        function construireListeMaladies() { 
+            var liste = document.getElementById("maladies");
+            for (var i = 0; i < tabMaladies.length; i++) { 
+                var newOption = document.createElement("option");
+                newOption.text = tabMaladies[i];  
+                newOption.value = i; 
+                liste.add(newOption, null);
+            }
+        }
+
+        function construireListeSolutions() { 
+            var liste = document.getElementById("solutions"); 
+            while (liste.options.length > 1) { 
+                liste.remove(1); 
+            }
+
+            var noMaladie = document.getElementById("maladies").selectedIndex; 
+            if (noMaladie > 0) { 
+                for (var i = 0; i < tabSolutions[noMaladie - 1].length; i++) {
+                    var newOption = document.createElement("option");
+                    newOption.text = tabSolutions[noMaladie - 1][i]; 
+                    newOption.value = i; 
+                    liste.add(newOption, null); 
+                }
+            }
+        }
+    </script>
+</body>
+</html>
