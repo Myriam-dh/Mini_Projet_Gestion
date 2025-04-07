@@ -1,1 +1,2 @@
-Travail de Lyna
+Fichier de test pour branche de développement
+Le nom "Lyna" de la branche est pour simuler un collaborateur 
